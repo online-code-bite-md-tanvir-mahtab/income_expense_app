@@ -151,12 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Padding(
-          padding: EdgeInsetsGeometry.only(left: 6),
+          padding: EdgeInsetsGeometry.only(left: 6, top: 0),
           child: Text(
             '\$500,489',
             style: GoogleFonts.anta(
               fontSize: 32,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: const Color(0xFFFF3F21), // Light purple for the amount
             ),
           ),
@@ -167,33 +167,102 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildThisMonthSummary() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      margin: EdgeInsetsGeometry.only(top: 10),
+      child: Column(
         children: [
-          _buildSummaryCard(
-            title: 'Expense',
-            amount: '\$24,589',
-            icon: Icons.show_chart,
-            isExpense: true,
+          Center(
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                // Rectangle 4094 (background curved shape)
+                Positioned(
+                  bottom: -8, // overlap half of the button
+                  child: Container(
+                    width: 80,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border(
+                        top: BorderSide(
+                          color: const Color(0xff2B1C2933).withOpacity(0.2),
+                          width: 1.2,
+                        ),
+                        left: BorderSide(
+                          color: const Color(0xff2B1C2933).withOpacity(0.2),
+                          width: 1.2,
+                        ),
+                        right: BorderSide(
+                          color: const Color(0xff2B1C2933).withOpacity(0.2),
+                          width: 1.2,
+                        ),
+                        bottom: BorderSide.none, // no bottom border
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Main "This Month" button
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(3),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.pink.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Color(0xFFFF0080), Color(0xFFFF4DA6)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ).createShader(bounds),
+                    child: Text(
+                      'This Month',
+                      style: GoogleFonts.poppins(
+                        fontSize: 7,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white, // Use white for gradient text
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          _buildSummaryCard(
-            title: 'Income',
-            amount: '\$24,589',
-            icon: Icons.trending_up,
-            isExpense: false,
+          SizedBox(height: 3),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSummaryCard(
+                title: 'Expense',
+                amount: '\$24,589',
+                icon: Icons.trending_down,
+                isExpense: true,
+              ),
+              _buildSummaryCard(
+                title: 'Income',
+                amount: '\$24,589',
+                icon: Icons.trending_up,
+                isExpense: false,
+              ),
+            ],
           ),
         ],
       ),
@@ -206,71 +275,84 @@ class _MyHomePageState extends State<MyHomePage> {
     required IconData icon,
     required bool isExpense,
   }) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.6),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: isExpense ? Colors.pink[100] : Colors.green[100],
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                color: isExpense ? Colors.pink : Colors.green,
-                size: 20,
-              ),
-            ),
-            SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(color: Colors.black54, fontSize: 12),
+    return Container(
+      width: 160, // Fixed width
+      padding: EdgeInsets.only(left: 14, right: 2, bottom: 4, top: 4),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xff2B1C29), // Light purple for the amount
                 ),
-                Text(
-                  amount,
-                  style: TextStyle(
-                    color: isExpense ? Colors.red : Colors.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
+              ),
+              Text(
+                amount,
+                style: GoogleFonts.anta(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: isExpense
+                      ? const Color(0xffF32F42)
+                      : Color(0xff079933), // Light purple for the amount
                 ),
-              ],
+              ),
+            ],
+          ),
+          SizedBox(width: 66),
+          Container(
+            padding: EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              color: isExpense ? Color(0xffFF3F21) : Color(0xffFF3F21),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(6),
             ),
-          ],
-        ),
+            child: Icon(
+              icon,
+              color: isExpense ? Colors.white : Colors.white,
+              size: 15.5,
+            ),
+          ),
+        ],
       ),
     );
   }
 
+  // Usage
+
   Widget _buildTransactionsHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      padding: EdgeInsetsGeometry.only(
+        left: 16,
+        right: 16,
+        top: 34,
+        bottom: 10,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'Transactions',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.exo(
+              fontSize: 14.5,
+              fontWeight: FontWeight.w600,
               color: Colors.black87,
             ),
           ),
           Text(
             'Show All',
-            style: TextStyle(
-              color: Colors.purple[300],
-              fontSize: 16,
+            style: GoogleFonts.inter(
+              fontSize: 11.5,
               fontWeight: FontWeight.w600,
+              color: Color(0xff5B4950),
             ),
           ),
         ],
@@ -363,17 +445,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.6),
-        borderRadius: BorderRadius.circular(15),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
       child: Row(
         children: [
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: iconBgColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(50),
             ),
             child: Icon(icon, color: iconColor),
           ),
