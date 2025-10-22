@@ -443,15 +443,13 @@ class _MyHomePageState extends State<MyHomePage> {
     required bool isExpense,
   }) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
       child: Row(
         children: [
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: iconBgColor,
+              color: Color(0xffF4F4F4),
               borderRadius: BorderRadius.circular(50),
             ),
             child: Icon(icon, color: iconColor),
