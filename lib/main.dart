@@ -374,6 +374,9 @@ class _MyHomePageState extends State<MyHomePage> {
             amount: '-\$89.69',
             isExpense: true,
           ),
+          SizedBox(
+            height: 12,
+          ),
           _buildTransactionItem(
             icon: Icons.design_services,
             iconBgColor: Colors.purple[100]!,
@@ -382,6 +385,9 @@ class _MyHomePageState extends State<MyHomePage> {
             subtitle: 'Yesterday, 08:10 AM',
             amount: '+\$1500.00',
             isExpense: false,
+          ),
+          SizedBox(
+            height: 12,
           ),
           _buildTransactionItem(
             icon: Icons.local_pharmacy,
@@ -392,14 +398,8 @@ class _MyHomePageState extends State<MyHomePage> {
             amount: '-\$369.54',
             isExpense: true,
           ),
-          _buildTransactionItem(
-            icon: Icons.shopping_basket,
-            iconBgColor: Colors.red[100]!,
-            iconColor: Colors.red,
-            title: 'Grocery',
-            subtitle: 'Today, 12:30 AM',
-            amount: '-\$126.21',
-            isExpense: true,
+          SizedBox(
+            height: 12,
           ),
           _buildTransactionItem(
             icon: Icons.shopping_basket,
@@ -410,6 +410,9 @@ class _MyHomePageState extends State<MyHomePage> {
             amount: '-\$126.21',
             isExpense: true,
           ),
+          SizedBox(
+            height: 12,
+          ),
           _buildTransactionItem(
             icon: Icons.shopping_basket,
             iconBgColor: Colors.red[100]!,
@@ -418,6 +421,21 @@ class _MyHomePageState extends State<MyHomePage> {
             subtitle: 'Today, 12:30 AM',
             amount: '-\$126.21',
             isExpense: true,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          _buildTransactionItem(
+            icon: Icons.shopping_basket,
+            iconBgColor: Colors.red[100]!,
+            iconColor: Colors.red,
+            title: 'Grocery',
+            subtitle: 'Today, 12:30 AM',
+            amount: '-\$126.21',
+            isExpense: true,
+          ),
+          SizedBox(
+            height: 12,
           ),
           _buildTransactionItem(
             icon: Icons.shopping_basket,
@@ -447,36 +465,41 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.only(top:8, bottom:8, left:8, right:8),
             decoration: BoxDecoration(
-              color: Color(0xffF4F4F4),
+              color: const Color(0xff00000008).withOpacity(0.05),
               borderRadius: BorderRadius.circular(50),
+              border: Border.all(
+                color: Colors.white, // white border
+                width: 1.5, // adjust thickness if needed
+              ),
             ),
             child: Icon(icon, color: iconColor),
           ),
-          SizedBox(width: 15),
+          SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: 14,color: Color(0xff2B1C29),),
                 ),
                 SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: TextStyle(color: Colors.black54, fontSize: 12),
+                  style: GoogleFonts.inter(color: Color(0xff686868), fontSize: 12, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
           ),
           Text(
             amount,
-            style: TextStyle(
-              color: isExpense ? Colors.red[700] : Colors.green[700],
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+            textAlign: TextAlign.right,
+            style: GoogleFonts.anta(
+              color: isExpense ? Color(0xffD90024) : Color(0xff079933),
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
             ),
           ),
         ],
