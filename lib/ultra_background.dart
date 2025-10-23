@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:income_expense_app/widget/background_painter.dart';
+import 'package:income_expense_app/modules/widget/background_painter.dart';
 
 class UltraBackground extends StatefulWidget {
   final Widget myChild;
