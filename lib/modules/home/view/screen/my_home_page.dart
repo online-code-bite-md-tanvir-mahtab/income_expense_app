@@ -14,10 +14,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final HomeLogicController controller =Get.put(HomeLogicController());
+  final HomeLogicController controller = Get.put(HomeLogicController());
   final HomeWidget homeWidget = HomeWidget();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.add, color: Colors.white),
             onPressed: () {
               // Action when button is pressed
-              controller.incrementCounter();
+              controller.incrementCounter(context);
             },
           ),
         ),

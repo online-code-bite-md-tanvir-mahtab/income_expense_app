@@ -4,10 +4,7 @@ import 'package:income_expense_app/modules/home/view/screen/my_home_page.dart';
 import 'package:income_expense_app/modules/main/view/main_page.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MainPage(),
-  ));
+  runApp(GetMaterialApp(debugShowCheckedModeBanner: false, home: MainPage()));
 }
 
 class MyApp extends StatelessWidget {
