@@ -46,6 +46,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               homeWidget.buildAppBar(),
               const SizedBox(height: 13),
               buildPopToPrevious(),
+              const SizedBox(height: 16),
               _buildExpenseTypeSelector(),
               const SizedBox(height: 20),
               _buildCalendar(),
@@ -129,7 +130,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
           Text(
             'Add Expense',
             style: GoogleFonts.poppins(
-              fontSize: 16,
+              fontSize: 20,
               fontWeight: FontWeight.w500,
               color: const Color(0xFF2B1C29), // dark text color
             ),
@@ -140,8 +141,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
   }
 
   Widget _buildExpenseTypeSelector() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+    return Container(
       child: Row(
         children: [
           _buildTypeChip('Expense', const Color(0xFFF95B7D)),
@@ -156,24 +156,26 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   Widget _buildTypeChip(String title, Color color) {
     bool isSelected = _selectedExpenseType == title;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedExpenseType = title;
-        });
-      },
-      child: Container(
-        margin: const EdgeInsets.only(right: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? color : Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text(
-          '+$title',
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
-            fontWeight: FontWeight.bold,
+    return SizedBox(
+      width: 57,
+      height: 26,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedExpenseType = title;
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: isSelected ? color : Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            '+$title',
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
