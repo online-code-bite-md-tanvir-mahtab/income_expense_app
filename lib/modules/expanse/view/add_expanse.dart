@@ -140,43 +140,70 @@ class _AddExpensePageState extends State<AddExpensePage> {
     );
   }
 
+  // keep track of selected type
+
   Widget _buildExpenseTypeSelector() {
+    final expenseTypes = [
+      'Expense',
+      'Income',
+      'Savings',
+      'Subscription',
+      'Remainder',
+    ];
+
     return Container(
-      child: Row(
-        children: [
-          _buildTypeChip('Expense', const Color(0xFFF95B7D)),
-          _buildTypeChip('Income', Colors.grey.shade200),
-          _buildTypeChip('Savings', Colors.grey.shade200),
-          _buildTypeChip('Subscription', Colors.grey.shade200),
-          _buildTypeChip('Remainder', Colors.grey.shade200),
+      margin: const EdgeInsets.only(left: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            offset: const Offset(0, 3),
+          ),
         ],
       ),
-    );
-  }
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: expenseTypes.map((type) {
+            final bool isSelected = _selectedExpenseType == type;
 
-  Widget _buildTypeChip(String title, Color color) {
-    bool isSelected = _selectedExpenseType == title;
-    return SizedBox(
-      width: 57,
-      height: 26,
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            _selectedExpenseType = title;
-          });
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected ? color : Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Text(
-            '+$title',
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedExpenseType = type;
+                });
+              },
+              child: Container(
+                padding: EdgeInsets.only(top: 6, bottom: 6),
+                width: 80,
+                height: 30,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  gradient: isSelected
+                      ? const LinearGradient(
+                          colors: [
+                            Color(0xFFFF3F21), // red
+                            Color(0xFFE63AE9), // pink-purple
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
+                      : null,
+                  color: isSelected ? null : Colors.grey.shade200,
+                ),
+                child: Text(
+                  type,
+                  style: GoogleFonts.poppins(
+                    color: isSelected ? Colors.white : Colors.black,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

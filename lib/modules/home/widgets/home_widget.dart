@@ -13,7 +13,7 @@ class HomeWidget {
           child: CircleAvatar(
             radius: 13,
             backgroundImage: NetworkImage(
-              'https://scontent.fdac110-1.fna.fbcdn.net/v/t39.30808-6/550397504_1780752429222241_1234328624691204057_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEMnqQ85e96LOUsaLX3SjrlHvcm0bcsQ-Ue9ybRtyxD5SR_TwMhkSqCDLi6aPLrPyT3Np5eVCU4o-npcLX99cjp&_nc_ohc=XTInqKuotpUQ7kNvwHwnbB0&_nc_oc=Adm4Tz5c0sL3u0q4sJr_0ouAHk7CSDXF0_o9NwW39Sj3CCoGbAe2weoPUODZCSO_o6I&_nc_zt=23&_nc_ht=scontent.fdac110-1.fna&_nc_gid=rKr_xwLtF5z3pcfoE4d71w&oh=00_AffI66VTW-GnRBlpI4YotiJBsO9w5DXWkfJ3Lv1azJkT_w&oe=68FC6766',
+              'https://example.com/profile.jpg',
             ), // Replace with your image
           ),
         ),
@@ -248,7 +248,7 @@ class HomeWidget {
     );
   }
 
-   Widget _buildSummaryCard({
+  Widget _buildSummaryCard({
     required String title,
     required String amount,
     required IconData icon,
@@ -338,6 +338,7 @@ class HomeWidget {
       ),
     );
   }
+
   Widget _buildTransactionItem({
     required IconData icon,
     required Color iconBgColor,
