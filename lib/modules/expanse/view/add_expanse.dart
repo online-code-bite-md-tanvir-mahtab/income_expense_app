@@ -28,7 +28,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   // Dummy date data for the calendar
   final List<int> _daysInMonth = [23, 24, 25, 26, 27, 28, 29];
-  final int _selectedDay = 27;
+  int _selectedDay = 27;
 
   final HomeLogicController controller = Get.put(HomeLogicController());
   final HomeWidget homeWidget = HomeWidget();
@@ -210,125 +210,122 @@ class _AddExpensePageState extends State<AddExpensePage> {
   }
 
   Widget _buildCalendar() {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
+    // Example: one week (7 days)
+    final List<int> _daysInWeek = [25, 26, 27, 28, 29, 30, 31];
+    int _selectedDay = 28; // example selected day
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Header box
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300, width: 1),
+            borderRadius: BorderRadius.circular(12),
           ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 20),
+                icon: const Icon(Icons.arrow_back_ios, size: 18),
                 onPressed: () {},
               ),
               const Text(
-                'December',
+                'December 2025',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 20),
+                icon: const Icon(Icons.arrow_forward_ios, size: 18),
                 onPressed: () {},
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              Text(
-                'M',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'T',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'W',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'T',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'F',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'S',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-              Text(
-                'S',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _daysInMonth.map((day) {
-              bool isSelected = day == _selectedDay;
-              return Container(
+        ),
+        const SizedBox(height: 12),
+
+        // Weekdays header
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              'M',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'T',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'W',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'T',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'F',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'S',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+            Text(
+              'S',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 10),
+
+        // Single row of dates
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: _daysInWeek.map((day) {
+            bool isSelected = day == _selectedDay;
+            return GestureDetector(
+              onTap: () {
+                // setState(() => _selectedDay = day); // Uncomment if in StatefulWidget
+              },
+              child: Container(
                 width: 35,
                 height: 35,
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? const Color(0xFFF95B7D)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10),
+                  gradient: isSelected
+                      ? const LinearGradient(
+                          colors: [Color(0xFFFF3F21), Color(0xFFE63AE9)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
+                      : null,
+                  color: isSelected ? null : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: isSelected
+                        ? Colors.transparent
+                        : Colors.grey.shade300,
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Text(
                   day.toString(),
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black87,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 
