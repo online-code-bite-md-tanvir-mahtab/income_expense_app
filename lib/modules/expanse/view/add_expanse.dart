@@ -219,28 +219,50 @@ class _AddExpensePageState extends State<AddExpensePage> {
       children: [
         // Header box
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          width: 360,
+          height: 31,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300, width: 1),
-            borderRadius: BorderRadius.circular(12),
+            color: Color(0x05000000), // black 3% opacity
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: const Color(0xFFF4F4F4), width: 0.5),
+            boxShadow: const [
+              // Simulate the inner shadow by using two small outer shadows
+              BoxShadow(
+                color: Color(0xffFFFFFF),
+                offset: Offset(0, 1),
+                blurRadius: 1,
+                spreadRadius: 0,
+              ),
+              BoxShadow(
+                color: Color(0xFFF4F4F4),
+                offset: Offset(0, -1),
+                blurRadius: 1,
+                spreadRadius: 0,
+              ),
+            ],
           ),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 18),
+                icon: const Icon(Icons.arrow_back_ios, size: 14),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
                 onPressed: () {},
               ),
-              const Text(
-                'December 2025',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+              Text(
+                'December',
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xFF000000),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 18),
+                icon: const Icon(Icons.arrow_forward_ios, size: 14),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
                 onPressed: () {},
               ),
             ],
