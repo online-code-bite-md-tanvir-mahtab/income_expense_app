@@ -219,24 +219,24 @@ class _AddExpensePageState extends State<AddExpensePage> {
       children: [
         // Header box
         Container(
+          margin: const EdgeInsets.only(left: 16),
           width: 360,
           height: 31,
           decoration: BoxDecoration(
-            color: Color(0x05000000), // black 3% opacity
+            color: Color(0xff00000008).withOpacity(0.05), // black 3% opacity
             borderRadius: BorderRadius.circular(4),
             border: Border.all(color: const Color(0xFFF4F4F4), width: 0.5),
             boxShadow: const [
               // Simulate the inner shadow by using two small outer shadows
               BoxShadow(
-                color: Color(0xffFFFFFF),
+                color: Colors.transparent,
                 offset: Offset(0, 1),
-                blurRadius: 1,
-                spreadRadius: 0,
+                blurRadius: 12
               ),
               BoxShadow(
-                color: Color(0xFFF4F4F4),
+                color: Colors.transparent,
                 offset: Offset(0, -1),
-                blurRadius: 1,
+                blurRadius: 12,
                 spreadRadius: 0,
               ),
             ],
@@ -271,38 +271,41 @@ class _AddExpensePageState extends State<AddExpensePage> {
         const SizedBox(height: 12),
 
         // Weekdays header
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            Text(
-              'M',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'T',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'W',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'T',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'F',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'S',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-            Text(
-              'S',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
-          ],
+        Container(
+          
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              Text(
+                'M',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'T',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'W',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'T',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'F',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'S',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+              Text(
+                'S',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+              ),
+            ],
+          ),
         ),
 
         const SizedBox(height: 10),
